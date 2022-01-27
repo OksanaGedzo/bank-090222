@@ -8,13 +8,6 @@ import java.util.Random;
 @Service
 public class AccountService {
 
-    // TODO: loo teenus createExampleAccount() mis loob uue AccountDtoSolution objekti:
-    //  account number = random account number
-    //  firstName "John"
-    //  lastName "Smith"
-    //  balance 0
-    //  locked false
-
     public AccountDto createExampleAccount() {
         AccountDto accountDto = new AccountDto();
         accountDto.setAccountNumber(createRandomAccountNumber());
