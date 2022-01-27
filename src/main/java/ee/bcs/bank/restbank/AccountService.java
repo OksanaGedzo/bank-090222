@@ -68,12 +68,7 @@ public class AccountService {
     public RequestResult updateOwnerDetails(List<AccountDto> accounts, AccountDto accountDto) {
         RequestResult requestResult = new RequestResult();
 
-
         int accountId = accountDto.getId();
-        if (accountIdExist(accounts, accountId)) {
-            System.out.println();
-        }
-
         if (!accountIdExist(accounts, accountId)) {
             requestResult.setError("Account ID: " + accountId + "does not exist!");
             requestResult.setAccountId(accountId);
