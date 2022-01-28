@@ -70,11 +70,17 @@ public class BankController {
         return accountService.updateOwnerDetails(bank.getAccounts(), accountDto);
     }
 
-    // todo: endpoint millega saaab konto lukustada/avada. Kontrollige ka ID olemasolu
+    // todo: endpoint millega saab lukku switchida (lukustada/avada). Kontrollige ka ID olemasolu
+    //  lock/status
 
 
     @DeleteMapping("/delete/account")
     public RequestResult deleteAccount(@RequestParam int accountId) {
         return accountService.deleteAccount(bank.getAccounts(), accountId);
     }
+
+//    todo: Loo endpoint /bankstatement/by/lastname
+
+
+
 }
