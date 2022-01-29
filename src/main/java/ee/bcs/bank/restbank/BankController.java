@@ -316,7 +316,7 @@ public class BankController {
     // Kuna controllerDeleteAccount meetod, on defineeritud nii, et see tagastab RequestResult tüüpi objekti,
     // siis return'is peab olema RequestResult tüüpi objekt
     // Kuna meetodi parameetris on ära defineeritud @RequestParam int tüüpi objekt,
-    // siis Spring eeldab, et http sõnumile antakse kaasa request parameetet 'accountId'
+    // siis Spring eeldab, et http sõnumile antakse kaasa request parameeter 'accountId'
     // Kindlasti peab meetodi signatuuris olema ka see @RequestParam annotatsioon, sest muidu Spring ei tea,
     // et siia enpoint'ile peaks ka sisse tulema selline parameeter
     // Kui @RequestParam teema on veel endiselt segane, siis palun vaata uuesti "Spring @RequestParam":
@@ -347,7 +347,48 @@ public class BankController {
     }
 
     // todo: endpoint millega saab lukku switchida (lukustada/avada). Kontrollige ka ID olemasolu
-    //  lock/status
+    //  /lock/status
+
+    //  ÜLESANNE
+    //  Lisa endpoint millega saab lukku switchida (lukustada/avada)
+    //  Meetod võiks sisse võtta konto id   'accountId'
+    //  Teenus peaks 'accountId' järgi otsime ülesse õige konto ning vaatama selle 'locked' staatust
+    //  Kui locked on 'false' siis peaks see teenus selle 'locked' staatuse muutma 'true'ks
+    //  Kui locked on 'true' siis peaks see teenus selle muutma 'true'ks
+    //  teenus võiks tagastada RequestResult objekti koos koos loodava konto id ja transaktsiooni id'ga
+
+
+    // Kui meie veebiserverisse tuleb sisse http päring 'PUT' 'http://localhost:8080/solution/lock/status?accountId=1'
+    // sellisel juhul oleks RequestParam accountId sisendiks '1'
+    // siis käivitatakse selle mäppingu all olev meetod controllerSwitchLockStatus()
+    // Kuna controllerSwitchLockStatus meetod, on defineeritud nii, et see tagastab RequestResult tüüpi objekti,
+    // siis return'is peab olema RequestResult tüüpi objekt
+    // Kuna meetodi parameetris on ära defineeritud @RequestParam int tüüpi objekt,
+    // siis Spring eeldab, et http sõnumile antakse kaasa request parameeter 'accountId'
+    // Kindlasti peab meetodi signatuuris olema ka see @RequestParam annotatsioon, sest muidu Spring ei tea,
+    // et siia enpoint'ile peaks ka sisse tulema selline parameeter
+    // Kui @RequestParam teema on veel endiselt segane, siis palun vaata uuesti "Spring @RequestParam":
+    // https://youtu.be/9ovmRakMRBY
+    @PutMapping("/lock/status")
+    public RequestResult controllerSwitchLockStatus(int accountId) {
+        // Kutsume välja meie poolt defineeritud meetodi nimega switchLockStatus()
+        // See meetod on meil ära defineeritud AccountService klassis
+        // switchLockStatus() on meil selliselt defineeritud, et see võtab sisse parameetritena:
+        // List<AccountDto> ja int tüüpi objektid
+        // See on selleks vajalik, et me saaksime anda meetodisse kaasa anda objektid, kus sees on mingid andmed,
+        // millega me soovime kuidagi toimetada.
+        // switchLockStatus() meetod on defineeritud nii, et see tagastab RequestResult tüüpi objekti
+        // siin all me loome uue RequestResult tüüpi objekti 'result' mille sisse väärtustatakse
+        // selle switchLockStatus() meetodi poolt tagastatav tulemus.
+        // Kui meetodite teema on veel endiselt segane, siis palun vaata uuesti "Meetodite loomine" ja "Public ja Private meetodid":
+        // https://youtu.be/KtZfO5z_JzQ
+        // https://youtu.be/vJn0BuWFrBE
+        // vaata ka kommentaare selle meetodi sees
+        RequestResult result = accountService.switchLockStatus(bank.getAccounts(), accountId);
+
+        // http päringule tagastatakse 'result' objekt JSON'i kujul
+        return result;
+    }
 
 
 //    todo: Loo endpoint /bankstatement/by/lastname

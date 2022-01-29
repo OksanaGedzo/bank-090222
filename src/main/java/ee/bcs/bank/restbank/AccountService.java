@@ -248,24 +248,96 @@ public class AccountService {
 
     // See meetod on defineeritud nii, et ta võtab sisse List<AccountDto> tüüpi objekti ja int väärtuse
     // See on selleks vajalik, et me saaksime siin meetodis nende objektidega kuidagi toimetada.
-    // See meetod peab tagastama booleani tüüpi vastuse (true/false)
+    // See meetod peab tagastama RequestResult tüüpi objekti
     // Kui meetodite teema on veel endiselt segane, siis palun vaata uuesti "Meetodite loomine" ja "Public ja Private meetodid":
     // https://youtu.be/KtZfO5z_JzQ
     // https://youtu.be/vJn0BuWFrBE
     public RequestResult deleteAccount(List<AccountDto> accounts, int accountId) {
-        RequestResult requestResult = new RequestResult();
+        // Võtame deleteAccount() signatuuri parameetris sisse List<AccountDto> tüüpi objekt ja int tüüpi väärtus
+        // Siin signatuuris antakse nendele objektidele nimeks 'accounts' ja 'accountId'
+        // accounts = list kontodest mis on meie bank objektis
+        // accountId = konto ID, mille objekti soovime 'accounts' listist eemaldada
+
+        // Loome uue RequestResult tüüpi objekti 'result'
+        // See on siis see objekt, mida meie meetod updateOwnerDetails() hakkab hiljem return'iga tagastama
+        RequestResult result = new RequestResult();
 
         if (!accountIdExist(accounts, accountId)) {
-            requestResult.setError("Account ID: " + accountId + " does not exist!");
-            requestResult.setAccountId(accountId);
-            return requestResult;
+            result.setError("Account ID: " + accountId + " does not exist!");
+            result.setAccountId(accountId);
+            return result;
         }
 
+        // leiame konto objekti meie seniste kontode hulgast
         AccountDto account = getAccountById(accounts, accountId);
+
+        // eemaldame objekti listist (andes sisendiks objekti enda, mida soovime listist eemaldada)
         accounts.remove(account);
 
-        requestResult.setMessage("Account deleted");
-        requestResult.setAccountId(accountId);
-        return requestResult;
+        // väärtustame setteritega mingid väärtused
+        result.setMessage("Account deleted");
+        result.setAccountId(accountId);
+
+        // Tagastame RETURN statement'iga 'result' tulemuse
+        // Peale return'i minnakse sellest defineeritud deleteAccount() meetodist välja
+        return result;
+    }
+
+
+    // See meetod on defineeritud nii, et ta võtab sisse List<AccountDto> tüüpi objekti ja int väärtuse
+    // See on selleks vajalik, et me saaksime siin meetodis nende objektidega kuidagi toimetada.
+    // See meetod peab tagastama RequestResult tüüpi objekti
+    // Kui meetodite teema on veel endiselt segane, siis palun vaata uuesti "Meetodite loomine" ja "Public ja Private meetodid":
+    // https://youtu.be/KtZfO5z_JzQ
+    // https://youtu.be/vJn0BuWFrBE
+    public RequestResult switchLockStatus(List<AccountDto> accounts, int accountId) {
+        // Loome uue RequestResult tüüpi objekti 'result'
+        // See on siis see objekt, mida meie meetod updateOwnerDetails() hakkab hiljem return'iga tagastama
+        RequestResult result = new RequestResult();
+
+        // kontrollime kas konto eksisteerib (konto ID järgi - 1, 2, 3, jne)
+        // Kutsume välja meie poolt defineeritud meetodi nimega accountIdExist()
+        // See meetod on meil ära defineeritud AccountService klassis
+        // Kaasa anname parameetrina 'accounts' objekti (kõik 'bank' objektis olevad kontod) ja 'accountId' (otsitava konto ID)
+        // See on selleks vajalik, et me saaksime seal meetodis sellega toimetada:
+        // nagu meetodi nimigi ütleb, vaatame, et kas sellise accountId'ga konto eksisteerib  meie 'accounts' listis
+        // vaata ka kommentaare selle meetodi sees
+        if (!accountIdExist(accounts, accountId)) {
+            // ! märk keerab true ja false tulemuse vastupidiseks.
+            // seda meetodit accountIdExist() peaks lugema vastupidiselt ehk siis peaks mõttes lugema "if accountIdDoesNotExist"
+            // Kui ! märgi teema on veel endiselt segane, siis palun vaata uuesti (algab umbes 5:50):
+            // https://www.youtube.com/watch?v=-ZoNqSyZcAk&list=PLoUhzAQ9yR0JBefXhMgV9k0Ycof5yHfNC&index=14&t=265s
+
+            // meisterdame setteritega valmis 'result' objekti (result objekti defineerisime ja lõime meie addNewTransaction() meetodi alguses)
+            result.setError("Account ID: " + accountId + " does not exist!");
+            result.setAccountId(accountId);
+            return result;
+        }
+
+        // leiame konto objekti meie seniste kontode hulgast
+        AccountDto account = getAccountById(accounts, accountId);
+        // Võtame 'account' objektist getteri abil locked staatuse
+        Boolean lockedStatus = account.getLocked();
+
+        // kui locked staatus on true, siis minnakse if koodibloki sisse
+        if (lockedStatus) {
+            // ja muudetakse setteri abil locked 'false' peale
+            account.setLocked(false);
+            // ning setteri abil pannakse result messageks "Account is now unlocked"
+            result.setMessage("Account is now unlocked!");
+        } else {
+            // kui lockedStatus on 'false'
+            // ja muuda setteri abil locked 'true' peale
+            account.setLocked(true);
+            // ning setteri abil pane result messageks "Account is now locked"
+            result.setMessage("Account is now locked!");
+        }
+
+        // setteri abil lisatakse ka resulti objekti ka accountId;
+        result.setAccountId(accountId);
+
+        // Tagastame RETURN statement'iga 'result' tulemuse
+        // Peale return'i minnakse sellest defineeritud switchLockStatus() meetodist välja
+        return result;
     }
 }

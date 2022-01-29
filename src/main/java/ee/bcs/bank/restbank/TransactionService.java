@@ -610,7 +610,7 @@ public class TransactionService {
         result.setMessage("Transaction received");
 
         // Tagastame RETURN statement'iga 'result' tulemuse
-        // Peale return'i minnakse sellest defineeritud enoughMoneyOnAccount() meetodist välja
+        // Peale return'i minnakse sellest defineeritud receiveNewTransaction() meetodist välja
         return result;
     }
 
