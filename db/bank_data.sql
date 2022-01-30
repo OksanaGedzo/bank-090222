@@ -6,6 +6,7 @@ INSERT INTO public.customer (id, first_name, last_name) VALUES (DEFAULT, 'Keit',
 INSERT INTO public.bank_account (id, account_number, customer_id, balance, locked) VALUES (DEFAULT, 'EE123', 1, 0, false);
 INSERT INTO public.bank_account (id, account_number, customer_id, balance, locked) VALUES (DEFAULT, 'EE456', 2, 0, false);
 INSERT INTO public.bank_account (id, account_number, customer_id, balance, locked) VALUES (DEFAULT, 'EE666', 3, 0, false);
+INSERT INTO public.bank_account (id, account_number, customer_id, balance, locked) VALUES (DEFAULT, 'EE999', 4, 0, false);
 
 INSERT INTO public.bank_transaction (id, balance, type, amount, transaction_date_time, bank_account_id, sender_account_number, receiver_account_number) VALUES (DEFAULT, 0, 'n', 0, '2022-01-27 22:51:18.000000', 1, null, null);
 INSERT INTO public.bank_transaction (id, balance, type, amount, transaction_date_time, bank_account_id, sender_account_number, receiver_account_number) VALUES (DEFAULT, 100, 'd', 100, '2022-01-27 22:51:18.000000', 1, 'ATM', 'EE123');
