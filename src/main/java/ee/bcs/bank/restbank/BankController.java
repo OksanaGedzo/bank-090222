@@ -394,8 +394,9 @@ public class BankController {
 
 
 //    todo: Loo endpoint /bankstatement/by/lastname
+    // KONTO VÄLJAVÕTE (PEREKONNA NIME JÄRGI)
     // tee kõigepealt üks public meetod controllerBankStatementByName()
-    // Meetod peaks tagastama RequestResult tüüpi objekti,
+    // Meetod peaks tagastama List<TransactionDto> tüüpi objekti (kannetest/tehingutest)
     // Ära hakka kohe Controlleri annotatsioonidele mõtlema. Tee alustuseks lihtsalt üks public meetod valmis. Võid alguses panna "return null
     // Kui mingi meetodi põhi on valmis (võib olla täitsa igasuguse sisuta meetod),
     // siis hakka mõtlema controlleri mäppimise peale, et millise millise HTTP meetodiga võiks/peaks selline sõnum sisse tulema
@@ -408,8 +409,6 @@ public class BankController {
 
     // vihjeks nii palju, et seoses meie andmete hoidmise struktuuriga oleks sul vaja teha minimaalselt kaks eraldi tegevust/etappi
     // 1) oleks vaja leida õige konto ID, kasutades perekonna nime.
-    //      Mõtle kas peaksid enne ka kontrollima seda, et kas sellise nimega konto on üldse kontode listis olemas?
-    //      Mida teha siis kui ei ole???
     // 2) oleks vaja siis leida selle ID järgi bank objektist kõik need transactionid, mis on selle ID'ga seotud.
     // Mõtle sellele, et kas mõnes service klassis on juba olemas mõni teenus mis võiks sind kuidagi aidata.
     // Mõtle sellele, et kas oleks vaja mingit funktsionaalsust juurde ehitada? Kui jah siis, kus service klassis see võiks elada...
