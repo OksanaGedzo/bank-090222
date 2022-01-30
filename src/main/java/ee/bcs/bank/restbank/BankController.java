@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/solution")
 public class BankController {
-
+// midaiganes
     public static Bank bank = new Bank();
 
     @Resource
