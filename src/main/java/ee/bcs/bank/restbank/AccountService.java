@@ -82,7 +82,6 @@ public class AccountService {
     }
 
     public RequestResult deleteAccount(List<AccountDto> accounts, int accountId) {
-
         RequestResult result = new RequestResult();
 
         if (!accountIdExist(accounts, accountId)) {

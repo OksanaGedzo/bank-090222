@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 public class BalanceService {
 
     public boolean enoughMoneyOnAccount(Integer balance, Integer amount) {
-
         boolean result = balance >= amount;
         return result;
     }
