@@ -98,8 +98,13 @@ public class BankController {
 
         List<TransactionDto> resultTransactions = new ArrayList<>();
 
+        for (TransactionDto transaction : allTransactions) {
+            if (transaction.getAccountId() == accountId) {
+                resultTransactions.add(transaction);
+            }
+        }
 
-        return null;
+        return resultTransactions;
 
     }
 
