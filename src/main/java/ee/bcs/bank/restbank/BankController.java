@@ -21,6 +21,9 @@ public class BankController {
     @Resource
     private BankService bankService;
 
+    @Resource
+    private BankStatementService bankStatementService;
+
     @GetMapping("/bank")
     public Bank controllerGetBank() {
         return bank;
@@ -74,68 +77,11 @@ public class BankController {
         return result;
     }
 
-
-//    todo: Loo endpoint /bankstatement/by/lastname
-    // KONTO VÄLJAVÕTE (PEREKONNA NIME JÄRGI)
-    // tee kõigepealt üks public meetod controllerBankStatementByName()
-    // Meetod peaks tagastama List<TransactionDto> tüüpi objekti (kannetest/tehingutest)
-    // Ära hakka kohe Controlleri annotatsioonidele mõtlema. Tee alustuseks lihtsalt üks public meetod valmis. Võid alguses panna "return null
-    // Kui mingi meetodi põhi on valmis (võib olla täitsa igasuguse sisuta meetod),
-    // siis hakka mõtlema controlleri mäppimise peale, et millise millise HTTP meetodiga võiks/peaks selline sõnum sisse tulema
-    // Lisa raja definitsioon "/bankstatement/by/lastname"
-    // Teades, et sisendiks on vaid üks String tüüpi sisend (perekonna nimi),
-    // siis mõtle sellele, et millist sisendi sisse saamise lähenemist oleks kõige mõistlikum kasutada:
-    // PathVariable,
-    // RequestParam või
-    // RequestBody
-
     @GetMapping("/bankstatement/by/lastname")
     public List<TransactionDto> controllerBankStatementByName(@RequestParam String lastName) {
-
-        int accountId = accountService.getAccountIdByLastName(bank.getAccounts(), lastName);
-
-        List<TransactionDto> allTransactions = bank.getTransactions();
-
-        List<TransactionDto> resultTransactions = new ArrayList<>();
-
-        for (TransactionDto transaction : allTransactions) {
-            if (transaction.getAccountId() == accountId) {
-                resultTransactions.add(transaction);
-            }
-        }
-
+        List<TransactionDto> resultTransactions =  bankStatementService.getStatementByLastName(bank,lastName);
         return resultTransactions;
-
     }
 
-
-
-    // vihjeks nii palju, et seoses meie andmete hoidmise struktuuriga oleks sul vaja teha minimaalselt kaks eraldi tegevust/etappi
-    // 1) oleks vaja leida õige konto ID, kasutades perekonna nime.
-    // 2) oleks vaja siis leida selle ID järgi bank objektist kõik need transactionid, mis on selle ID'ga seotud.
-    // Mõtle sellele, et kas mõnes service klassis on juba olemas mõni teenus mis võiks sind kuidagi aidata.
-    // Mõtle sellele, et kas oleks vaja mingit funktsionaalsust juurde ehitada? Kui jah siis, kus service klassis see võiks elada...
-    // Kui hakkad mingit uut meetodit tegema ja defineerima,
-    // siis võid alguses teha need void tüüpi ja siis pärast hiljem ümber muuta, et mida nad võiks tagastada. Vahel on nii lihtsam kusagilt alustada.
-    // Aga kui sa isegi tead, et mis tüüpi objekti või objektide listi see meetod võiks tagastada, siis alguses võid vabalt panna ikkagi return null;
-    // Saad hiljem kõike muuta.
-    // Võid alguses ka kogu pikalt kirja pandud loogika controllerBankStatementByName() meetodi sees ära lahendada ning hiljem mõelda,
-    // et kus miski võiks elada ja kuhu võiks äkki mingi meetodi teha.
-    // Kui lood mingeid meetodeid, mis tagastavad midagi, siis tagasta meetodi tulemused kuhugi muutujasse ning
-    // pane muutuja nimeks midagi, mis sulle ütleb täpselt, et mis asjad seal muutujas siis täpselt ka on.
-    // Võid alguses isegi eesti keeles teha kui tahad. Kõike saab hiljem re-faktoreerida.
-    // Kui kõik on kenasti valmis ja töötab, siis mõtle, et kas tahaksid äkki proovida teha mingi täitsa uue service klassi,
-    // et saaksid kogu tegevuse kuhugi kenasti ühte kohta panna (näiteks BankStatementService või midagi sarnast).
-
-
-    // kuidas saab mingist suuremast listist mingi väiksema listi teha, võttes sealt vaid neid objekte, mis pakuvad huvi:
-
-//    public List<TransactionDto> getBankStatementById(List<TransactionDto> transactions, int accountId) {
-//
-//        List<TransactionDto> result = new ArrayList<>();
-//
-//
-//        return result;
-//    }
 
 }

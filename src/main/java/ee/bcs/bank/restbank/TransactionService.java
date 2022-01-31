@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -201,6 +202,17 @@ public class TransactionService {
         result.setTransactionId(transactionId);
         result.setMessage("Transaction received");
         return result;
+    }
+
+
+    public List<TransactionDto> getTransactionsByAccountId(int accountId, List<TransactionDto> allTransactions) {
+        List<TransactionDto> resultTransactions = new ArrayList<>();
+        for (TransactionDto transaction : allTransactions) {
+            if (transaction.getAccountId() == accountId) {
+                resultTransactions.add(transaction);
+            }
+        }
+        return resultTransactions;
     }
 
 }
