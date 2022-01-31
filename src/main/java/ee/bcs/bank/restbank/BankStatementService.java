@@ -14,7 +14,6 @@ public class BankStatementService {
     @Resource
     private TransactionService transactionService;
 
-
     public List<TransactionDto> getStatementByLastName(Bank bank, String lastName) {
         int accountId = accountService.getAccountIdByLastName(bank.getAccounts(), lastName);
         List<TransactionDto> allTransactions = bank.getTransactions();

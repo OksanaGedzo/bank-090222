@@ -78,25 +78,22 @@ public class BankController {
 
     @GetMapping("/bankstatement/by/lastname")
     public List<TransactionDto> controllerBankStatementByName(@RequestParam String lastName) {
-        List<TransactionDto> resultTransactions =  bankStatementService.getStatementByLastName(bank,lastName);
-        return resultTransactions;
+        List<TransactionDto> result = bankStatementService.getStatementByLastName(bank, lastName);
+        return result;
     }
 
-
-    @GetMapping("/deposit")
-    public RequestResult makeDeposit(@RequestBody TransactionDto transactionDto) {
-        //  loo teenus, mis teeb deposiit kande (bankService alla)
-        return null;
+    @PostMapping("/deposit")
+    public RequestResult controllerMakeDeposit(@RequestBody TransactionDto transactionDto) {
+        RequestResult result = bankService.makeDeposit(bank, transactionDto);
+        return result;
     }
 
     // todo uued teenused
 
     // KÕIK TEENUSED BankService'i alla
-    // uus endpoint /deposit
     // uus endpoint /withdraw
     // uus endpoint /send/money
     // /new/account -  konto lisamisel lisatakse ka tühi transaction nagu töötab "transactionType": "n"
-
 
 
 }
