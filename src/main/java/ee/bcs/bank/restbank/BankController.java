@@ -3,7 +3,6 @@ package ee.bcs.bank.restbank;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -82,6 +81,22 @@ public class BankController {
         List<TransactionDto> resultTransactions =  bankStatementService.getStatementByLastName(bank,lastName);
         return resultTransactions;
     }
+
+
+    @GetMapping("/deposit")
+    public RequestResult makeDeposit(@RequestBody TransactionDto transactionDto) {
+        //  loo teenus, mis teeb deposiit kande (bankService alla)
+        return null;
+    }
+
+    // todo uued teenused
+
+    // KÕIK TEENUSED BankService'i alla
+    // uus endpoint /deposit
+    // uus endpoint /withdraw
+    // uus endpoint /send/money
+    // /new/account -  konto lisamisel lisatakse ka tühi transaction nagu töötab "transactionType": "n"
+
 
 
 }
