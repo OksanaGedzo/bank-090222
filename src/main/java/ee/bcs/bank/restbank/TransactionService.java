@@ -134,7 +134,7 @@ public class TransactionService {
 
                 receiverAccountNumber = transaction.getReceiverAccountNumber();
                 if (accountService.accountNumberExist(accounts, receiverAccountNumber)) {
-                    AccountDto receiverAccount = accountService.getAccountByNumber(accounts, receiverAccountNumber);
+                    AccountDto receiverAccount = accountService.getAccountByAccountNumber(accounts, receiverAccountNumber);
 
                     int receiverAccountId = receiverAccount.getId();
                     Integer receiverCurrentBalance = receiverAccount.getBalance();
@@ -177,7 +177,7 @@ public class TransactionService {
             return result;
         }
 
-        AccountDto receiverAccount = accountService.getAccountByNumber(accounts, receiverAccountNumber);
+        AccountDto receiverAccount = accountService.getAccountByAccountNumber(accounts, receiverAccountNumber);
 
         int transactionId = bank.getTransactionIdCounter();
         Integer receiverCurrentBalance = receiverAccount.getBalance();

@@ -3,6 +3,8 @@ package ee.bcs.bank.restbank;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/solution")
@@ -87,6 +89,22 @@ public class BankController {
     // RequestParam või
     // RequestBody
 
+    @GetMapping("/bankstatement/by/lastname")
+    public List<TransactionDto> controllerBankStatementByName(@RequestParam String lastName) {
+
+        int accountId = accountService.getAccountIdByLastName(bank.getAccounts(), lastName);
+
+        List<TransactionDto> allTransactions = bank.getTransactions();
+
+        List<TransactionDto> resultTransactions = new ArrayList<>();
+
+
+        return null;
+
+    }
+
+
+
     // vihjeks nii palju, et seoses meie andmete hoidmise struktuuriga oleks sul vaja teha minimaalselt kaks eraldi tegevust/etappi
     // 1) oleks vaja leida õige konto ID, kasutades perekonna nime.
     // 2) oleks vaja siis leida selle ID järgi bank objektist kõik need transactionid, mis on selle ID'ga seotud.
@@ -106,13 +124,12 @@ public class BankController {
 
 
     // kuidas saab mingist suuremast listist mingi väiksema listi teha, võttes sealt vaid neid objekte, mis pakuvad huvi:
-//    public List<SomeClass> getListOfItemsFromExistingListThatImInterested(List<SomeClass> someItems, int someId) {
-//        List<SomeClass> result = new ArrayList<>();
-//        for (SomeClass someItem : someItems) {
-//            if (someItem.getId() == someId) {
-//                result.add(someItem);
-//            }
-//        }
+
+//    public List<TransactionDto> getBankStatementById(List<TransactionDto> transactions, int accountId) {
+//
+//        List<TransactionDto> result = new ArrayList<>();
+//
+//
 //        return result;
 //    }
 

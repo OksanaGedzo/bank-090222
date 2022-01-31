@@ -51,14 +51,33 @@ public class AccountService {
         return false;
     }
 
-    public AccountDto getAccountByNumber(List<AccountDto> accounts, String receiverAccountNumber) {
+    public AccountDto getAccountByAccountNumber(List<AccountDto> accounts, String accountNumber) {
         for (AccountDto account : accounts) {
-            if (account.getAccountNumber().equals(receiverAccountNumber)) {
+            if (account.getAccountNumber().equals(accountNumber)) {
                 return account;
             }
         }
         return null;
     }
+
+    public AccountDto getAccountByLastName(List<AccountDto> accounts, String lastName) {
+        for (AccountDto account : accounts) {
+            if (account.getLastName().equals(lastName)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public int getAccountIdByLastName(List<AccountDto> accounts, String lastName) {
+        for (AccountDto account : accounts) {
+            if (account.getLastName().equals(lastName)) {
+                return account.getId();
+            }
+        }
+        return 0;
+    }
+
 
     public RequestResult updateOwnerDetails(List<AccountDto> accounts, AccountDto incomingUpdatedAccount) {
         RequestResult result = new RequestResult();
