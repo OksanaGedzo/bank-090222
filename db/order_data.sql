@@ -1,0 +1,10 @@
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Kadi', 'Supermann', 'Kadi aadress');
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Aleksei', 'Gornov', 'Aleksei aadress');
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Keit', 'Klaabu', 'Keidi aadress');
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Mart', 'Tamm', 'Mardi aadress');
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Mari', 'Maasikas', 'Mari aadress');
+INSERT INTO public.end_customer (id, first_name, last_name, address) VALUES (DEFAULT, 'Tõnu', 'Tõnn', 'Tõnni aadress');
+INSERT INTO public.item (id, name, description, price_per_item) VALUES (DEFAULT, 'seep', '1tk, väga libe seep', 2);
+INSERT INTO public.item (id, name, description, price_per_item) VALUES (DEFAULT, 'nöör', '10m, väga kare nöör', 3);
+INSERT INTO public.item (id, name, description, price_per_item) VALUES (DEFAULT, 'bensiin', '1 liiter, põleb hästi', 2);
+INSERT INTO public.item (id, name, description, price_per_item) VALUES (DEFAULT, 'tikud', '1 suur pakk,(10tk)', 1);
