@@ -1,9 +1,7 @@
-package ee.bcs.bank.repository;
+package ee.bcs.bank.shop.item;
 
-import ee.bcs.bank.entity.Item;
+import ee.bcs.bank.shop.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 }

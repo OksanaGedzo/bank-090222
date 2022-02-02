@@ -1,5 +1,7 @@
-package ee.bcs.bank.entity;
+package ee.bcs.bank.shop.orderservice;
 
+import ee.bcs.bank.shop.item.Item;
+import ee.bcs.bank.shop.order.Order;
 import lombok.Getter;
 import lombok.Setter;
 

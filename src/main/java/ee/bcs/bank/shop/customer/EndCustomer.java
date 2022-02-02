@@ -1,4 +1,4 @@
-package ee.bcs.bank.entity;
+package ee.bcs.bank.shop.customer;
 
 import lombok.Getter;
 import lombok.Setter;
