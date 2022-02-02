@@ -14,4 +14,9 @@ public interface EndCustomerRepository extends JpaRepository<EndCustomer, Intege
 
     @Query("select e from EndCustomer e where e.id = :integer")
     EndCustomer pleaseFindById(@Param("integer") Integer integer);
+
+    EndCustomer findByLastName(String lastName);
+
+
+
 }

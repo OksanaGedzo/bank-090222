@@ -26,14 +26,20 @@ public class OrderItemController {
     private ItemRepository itemRepository;
 
     @PostMapping("/add")
-    public OrderItem addItemToOrder(@RequestParam Integer itemId, @RequestParam Integer orderId) {
+    public Order addItemToOrder(@RequestParam Integer itemId,
+                                    @RequestParam Integer orderId,
+                                    @RequestParam Integer quantity) {
+
+        Item item = itemRepository.findById(itemId).get();
+        Order order = orderRepository.findById(orderId).get();
+
         OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrder(order);
+        orderItem.setQuantity(quantity);
+        orderItem.setItemTotalPrice(quantity * item.getPricePerItem());
+        orderItemRepository.save(orderItem);
 
-        Item item = itemRepository.getById(itemId);
-        Optional<Item> byId = itemRepository.findById(itemId);
-
-        Order order = orderRepository.getById(orderId);
-
-        return null;
+        return order;
     }
 }

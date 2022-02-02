@@ -30,4 +30,10 @@ public class EndCustomerController {
         return customer;
     }
 
+    @GetMapping("/by/name")
+    public EndCustomer getCustomerByLastName(@RequestParam String lastName) {
+        EndCustomer customer = endCustomerRepository.findByLastName(lastName);
+        return customer;
+    }
+
 }
