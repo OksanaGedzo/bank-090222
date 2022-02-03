@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/order/item")
+//@RestController
+//@RequestMapping("/order/item")
 public class OrderItemController {
 
     @Resource

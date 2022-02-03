@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 import java.time.Instant;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/order")
+//@RestController
+//@RequestMapping("/order")
 public class OrderController {
 
     @Resource
