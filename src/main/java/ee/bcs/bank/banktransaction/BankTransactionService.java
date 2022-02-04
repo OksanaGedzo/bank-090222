@@ -49,7 +49,7 @@ public class BankTransactionService {
         //      Sul on juba mingid andmed kenasti request'is (dto) olemas
         //      Vaata, et kas sa äkki saad kasutada ära mingit BankTransactionMapper'is olevat mäpperit,
         //      millega saad kenasti luua uue mäpitud andmetega entity objekti.
-        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas ja millised tuleks SETTERITEGA juurde lisada
+        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas (vajadusel uuri debuggeriga) ja millised tuleks SETTERITEGA juurde lisada
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
@@ -83,7 +83,7 @@ public class BankTransactionService {
         //      Sul on juba mingid andmed kenasti request'is (dto) olemas
         //      Vaata, et kas sa äkki saad kasutada ära mingit BankTransactionMapper'is olevat mäpperit,
         //      millega saad kenasti luua uue mäpitud andmetega entity objekti.
-        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas ja millised tuleks SETTERITEGA juurde lisada
+        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas (vajadusel uuri debuggeriga) ja millised tuleks SETTERITEGA juurde lisada
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
@@ -113,7 +113,7 @@ public class BankTransactionService {
         //      Sul on juba mingid andmed kenasti request'is (dto) olemas
         //      Vaata, et kas sa äkki saad kasutada ära mingit BankTransactionMapper'is olevat mäpperit,
         //      millega saad kenasti luua uue mäpitud andmetega entity objekti.
-        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas ja millised tuleks SETTERITEGA juurde lisada
+        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas (vajadusel uuri debuggeriga) ja millised tuleks SETTERITEGA juurde lisada
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
@@ -145,7 +145,7 @@ public class BankTransactionService {
         //      Sul on juba mingid andmed kenasti request'is (dto) olemas
         //      Vaata, et kas sa äkki saad kasutada ära mingit BankTransactionMapper'is olevat mäpperit,
         //      millega saad kenasti luua uue mäpitud andmetega entity objekti.
-        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas ja millised tuleks SETTERITEGA juurde lisada
+        //      Mõtle, et millised andmed sul on juba seal transaction objektis olemas (vajadusel uuri debuggeriga) ja millised tuleks SETTERITEGA juurde lisada
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
         // juhul kui receiverAccountNumber'it meie andmebaasis ei leidu, siis receive kannet pole lihtsalt vaja teha
