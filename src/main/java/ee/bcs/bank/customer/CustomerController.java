@@ -19,16 +19,17 @@ public class CustomerController {
         return response;
     }
 
+    // Leiab klienid (ees JA perekonna) nime järgi
     @GetMapping("/by/name")
     public CustomerResponse findCustomerByName(@RequestBody CustomerRequest request) {
         CustomerResponse response = customerService.findCustomerByName(request);
         return response;
     }
 
-    // uuendab isikukoodi järgi isikuanmdeid
+    // uuendab isikukoodi järgi isikuanmdeid (uuendab firstName ja lastName)
     @PutMapping("/update/by/id/code")
-    public RequestResponse updateCustomerByIdCode(@RequestParam String idCode, @RequestBody CustomerRequest customerRequest) {
-        RequestResponse response = customerService.updateCustomerByIdCode(idCode, customerRequest);
+    public RequestResponse updateCustomerByIdCode(@RequestBody CustomerRequest customerRequest) {
+        RequestResponse response = customerService.updateCustomerByIdCode(customerRequest);
         return response;
     }
 

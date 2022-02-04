@@ -32,9 +32,10 @@ public class CustomerService {
     }
 
 
-    public RequestResponse updateCustomerByIdCode(String idCode, CustomerRequest customerRequest){
-        RequestResponse response = new RequestResponse();
+    public RequestResponse updateCustomerByIdCode(CustomerRequest customerRequest) {
+        String idCode = customerRequest.getIdCode();
 
+        RequestResponse response = new RequestResponse();
         if (customerRepository.existsByIdCode(idCode)) {
             Customer customer = customerRepository.findByIdCode(idCode);
             customerMapper.updateCustomer(customerRequest, customer);
