@@ -1,7 +1,6 @@
 package ee.bcs.bank.newbank.banktransaction;
 
 import ee.bcs.bank.newbank.bankaccount.BankAccount;
-import ee.bcs.bank.newbank.bankaccount.BankAccountMapper;
 import ee.bcs.bank.newbank.bankaccount.BankAccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,8 @@ import java.time.Instant;
 
 @Service
 public class BankTransactionService {
+
+    public static final String SEND = "s";
 
     @Resource
     private BankAccountRepository bankAccountRepository;
@@ -23,8 +24,14 @@ public class BankTransactionService {
     public void sendMoneyBySenderLastName(BankTransactionDto bankTransactionDto, String lastName) {
         BankAccount bankAccount = bankAccountRepository.findBankAccountByCustomerLastName(lastName);
         BankTransaction bankTransaction = bankTransactionMapper.bankTransactionDtoToBankTransaction(bankTransactionDto);
+        Integer balance = bankAccount.getBalance();
+        Integer amount = bankTransactionDto.getAmount();
+        Integer newBalance = balance - amount;
+        bankAccount.setBalance(newBalance);
+        bankTransaction.setBalance(newBalance);
         bankTransaction.setBankAccount(bankAccount);
         bankTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
+        bankTransaction.setType(SEND);
         bankTransaction.setTransactionDateTime(Instant.now());
         bankTransactionRepository.save(bankTransaction);
     }
