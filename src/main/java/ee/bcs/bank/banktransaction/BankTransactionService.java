@@ -53,7 +53,7 @@ public class BankTransactionService {
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
-        // Kui tehing saab õnnelikult tehtud, siis võiks response MESSAGE külge panna sõnumi "Deposiit edukalt sooritatud!"
+        // Kui tehing saab õnnelikult tehtud [save()], siis võiks response MESSAGE külge panna sõnumi "Deposiit edukalt sooritatud!"
 
         return null;
     }
@@ -87,7 +87,7 @@ public class BankTransactionService {
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
-        // Kui tehing saab õnnelikult tehtud, siis võiks response MESSAGE külge panna sõnumi "Deposiit edukalt sooritatud!"
+        // Kui tehing saab õnnelikult tehtud [save()], siis võiks response MESSAGE külge panna sõnumi "Deposiit edukalt sooritatud!"
 
         return null;
     }
@@ -117,7 +117,7 @@ public class BankTransactionService {
         //      Ära unusta teha ka vajalike arvutusi (newBalance), ning ära unusta neid ka õigesse kohta külge panna
         //      Mõtle milliseid muutujanimesi võiks kasutada (depositTransaction, withdrawTransaction, senderTransaction, receiverTransaction, vms)
 
-        // Kui tehing saab õnnelikult tehtud, siis võiks response MESSAGE külge panna sõnumi "Raha ülekanne edukalt sooritatud!"
+        // Kui tehing saab õnnelikult tehtud [save()], siis võiks response MESSAGE külge panna sõnumi "Raha ülekanne edukalt sooritatud!"
 
         // juhul kui senderAccountNumber'it meie andmebaasis ei leidu, siis võiks tagastatavas responses ERROR'i sõnumile külge panna sõnumi:
         // "Ülekannet ei saanud teha, kuna pole sellise kontonumbriga EEXXXX klienti!");
@@ -127,8 +127,8 @@ public class BankTransactionService {
 
         // LAEKUV MAKSE
         // Laiem eesmärk nr 2:
-        //      Oleks vaja kontrollida, et kas ülekanda saaja (receiver) on juhuslikult meie klient.
-        //      Kui jah siis sellisel juhul tuleks lisada 'bank_transaction' tabelisse üks uus RECEIVE MONEY (laekuv) tehingu kanne.
+        //      Oleks vaja kontrollida, et kas ülekande saaja (receiver) on juhuslikult meie klient.
+        //      Kui jah, siis sellisel juhul tuleks lisada 'bank_transaction' tabelisse veel üks uus tehingu kanne - RECEIVE MONEY (laekuv kanne).
         //          Tehingu kanne peab sisaldama ka kõnealuse saajakonto 'bank_account_id'd
         //      Ühtlasi oleks vaja uuendada bank_account tabelis vastava saajakonto kontojääki (balance)
 
@@ -159,7 +159,7 @@ public class BankTransactionService {
         // LAEKUV MAKSE
         // suht sarnane asi nagu sendMoney, ainult, et nüüd on sisse laekuv makse
 
-        // Kui tehing saab õnnelikult tehtud, siis võiks response MESSAGE külge panna sõnumi "Raha ülekanne edukalt sooritatud!"
+        // Kui tehing saab õnnelikult tehtud [save()], siis võiks response MESSAGE külge panna sõnumi "Raha ülekanne edukalt sooritatud!"
 
         // juhul kui senderAccountNumber'it meie andmebaasis ei leidu, siis võiks tagastatavas responses ERROR'i sõnumile külge panna sõnumi:
         // "Ülekannet ei saanud teha, kuna pole sellise kontonumbriga EEXXXX klienti!");
