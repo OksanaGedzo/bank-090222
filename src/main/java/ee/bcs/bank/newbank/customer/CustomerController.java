@@ -18,7 +18,7 @@ public class CustomerController {
 
     @GetMapping("/by/lastname")
     public CustomerDto findCustomerByLastName(@RequestParam String lastName) {
-        CustomerDto result = customerService.findCustomerByLastName(lastName);
+        CustomerDto result = customerService.findCustomerDtoByLastName(lastName);
         return result;
     }
 

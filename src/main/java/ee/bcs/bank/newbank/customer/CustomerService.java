@@ -18,10 +18,16 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public CustomerDto findCustomerByLastName(String lastName) {
+    public CustomerDto findCustomerDtoByLastName(String lastName) {
         Customer customer = customerRepository.findByLastName(lastName);
         CustomerDto customerDto = customerMapper.customerToCustomerDto(customer);
         return customerDto;
+    }
+
+
+    public Customer findCustomerByLastName(String lastName) {
+        Customer customer = customerRepository.findByLastName(lastName);
+        return customer;
     }
 
     public void updateCustomerByLastName(String lastName, CustomerDto customerDto){
