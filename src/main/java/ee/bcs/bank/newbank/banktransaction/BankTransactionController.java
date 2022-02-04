@@ -18,6 +18,12 @@ public class BankTransactionController {
         bankTransactionService.sendMoneyBySenderLastName(bankTransactionDto, lastName);
     }
 
+    @PostMapping("/receive/money/by/receiver/lastname")
+    public void receiveMoneyByReceiverLastName(@RequestBody BankTransactionDto bankTransactionDto, @RequestParam String lastName) {
+//        bankTransactionService.receiveMoneyByReceiverLastName(bankTransactionDto, lastName);
+    }
+
+
 
 
 }

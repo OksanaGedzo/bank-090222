@@ -4,10 +4,10 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface CustomerMapper {
-    Customer customerDtoToCustomer(CustomerDto customerDto);
+    Customer toEntity(CustomerDto customerDto);
 
-    CustomerDto customerToCustomerDto(Customer customer);
+    CustomerDto toDto(Customer customer);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateCustomerFromCustomerDto(CustomerDto customerDto, @MappingTarget Customer customer);
+    void updateEntity(CustomerDto customerDto, @MappingTarget Customer customer);
 }

@@ -14,13 +14,13 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public void addNewCustomer(CustomerDto customerDto) {
-        Customer customer = customerMapper.customerDtoToCustomer(customerDto);
+        Customer customer = customerMapper.toEntity(customerDto);
         customerRepository.save(customer);
     }
 
     public CustomerDto findCustomerDtoByLastName(String lastName) {
         Customer customer = customerRepository.findByLastName(lastName);
-        CustomerDto customerDto = customerMapper.customerToCustomerDto(customer);
+        CustomerDto customerDto = customerMapper.toDto(customer);
         return customerDto;
     }
 
@@ -32,7 +32,7 @@ public class CustomerService {
 
     public void updateCustomerByLastName(String lastName, CustomerDto customerDto){
         Customer customer = customerRepository.findByLastName(lastName);
-        customerMapper.updateCustomerFromCustomerDto(customerDto, customer);
+        customerMapper.updateEntity(customerDto, customer);
         customerRepository.save(customer);
     }
 }

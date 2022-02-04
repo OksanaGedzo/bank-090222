@@ -23,7 +23,7 @@ public class BankTransactionService {
 
     public void sendMoneyBySenderLastName(BankTransactionDto bankTransactionDto, String lastName) {
         BankAccount bankAccount = bankAccountRepository.findBankAccountByCustomerLastName(lastName);
-        BankTransaction bankTransaction = bankTransactionMapper.bankTransactionDtoToBankTransaction(bankTransactionDto);
+        BankTransaction bankTransaction = bankTransactionMapper.toEntity(bankTransactionDto);
         Integer balance = bankAccount.getBalance();
         Integer amount = bankTransactionDto.getAmount();
         Integer newBalance = balance - amount;

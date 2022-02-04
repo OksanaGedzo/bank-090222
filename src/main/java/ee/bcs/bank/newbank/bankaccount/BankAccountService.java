@@ -29,7 +29,7 @@ public class BankAccountService {
 
     public void addNewAccountByLastName(BankAccountDto bankAccountDto, String lastName) {
         Customer customer = customerRepository.findByLastName(lastName);
-        BankAccount bankAccount = bankAccountMapper.bankAccountDtoToBankAccount(bankAccountDto);
+        BankAccount bankAccount = bankAccountMapper.toEntity(bankAccountDto);
         bankAccount.setCustomer(customer);
         bankAccount.setLocked(false);
         bankAccountRepository.save(bankAccount);
