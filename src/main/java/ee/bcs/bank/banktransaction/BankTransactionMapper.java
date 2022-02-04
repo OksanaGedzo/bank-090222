@@ -14,10 +14,10 @@ public interface BankTransactionMapper {
     // eraldi on mäpitud firstName ja lastName, sest ülejäänud välja nimed on nendel objektidel samad.
     @Mapping(target = "firstName", source = "bankAccount.customer.firstName")
     @Mapping(target = "lastName", source = "bankAccount.customer.lastName")
-    BankTransactionResponse toBankTransactionResponse(BankTransaction transaction);
+    BankTransactionResponse toResponse(BankTransaction transaction);
 
     // Sama mis eelmine kohe siin üleval, aga tehakse List sisend -> List väljund
-    List<BankTransactionResponse> toBankTransactionResponse(List<BankTransaction> transaction);
+    List<BankTransactionResponse> toResponseList(List<BankTransaction> transaction);
 
 
     //    mäpitakse ära väljad: accountNumber -> receiverAccountNumber
@@ -25,7 +25,7 @@ public interface BankTransactionMapper {
     //    amount -> amount
     @Mapping(target = "receiverAccountNumber", source = "accountNumber")
     @Mapping(target = "senderAccountNumber", constant = ATM)
-    BankTransaction depositRequestToBankTransaction(OwnerAccountTransactionRequest request);
+    BankTransaction toDepositTransaction(OwnerAccountTransactionRequest request);
 
 
     //    mäpitakse ära väljad: accountNumber -> receiverAccountNumber
@@ -33,7 +33,7 @@ public interface BankTransactionMapper {
     //    amount -> amount
     @Mapping(target = "senderAccountNumber", source = "accountNumber")
     @Mapping(target = "receiverAccountNumber", constant = ATM)
-    BankTransaction withdrawRequestToBankTransaction(OwnerAccountTransactionRequest request);
+    BankTransaction toWithdrawTransaction(OwnerAccountTransactionRequest request);
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

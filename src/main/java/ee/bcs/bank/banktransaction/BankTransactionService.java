@@ -169,7 +169,7 @@ public class BankTransactionService {
 
     public List<BankTransactionResponse> findAllTransactions() {
         List<BankTransaction> allTransactions = bankTransactionRepository.findAll();
-        List<BankTransactionResponse> responses = bankTransactionMapper.toBankTransactionResponse(allTransactions);
+        List<BankTransactionResponse> responses = bankTransactionMapper.toResponseList(allTransactions);
         return responses;
     }
 
