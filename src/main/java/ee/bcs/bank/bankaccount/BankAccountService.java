@@ -38,8 +38,10 @@ public class BankAccountService {
     }
 
     public List<BankAccountResponse> getAccountsByFirstNameStartsWith(String nameStartsWith) {
-        // BOONUS ÜLESANNE
-        // mõtle, et kuidas saaksid sellistele andmetele ligi.....
+        // BOONUS ÜLESANNE (Leia ülesse kõik pangakontod (pangakontod, mitte kliendid) mille kasutaja eesnimi algab....)
+        // (näiteks kui sisendiks on "k", siis peaks tagastama, Keit'i ja Kadi kontod)
+
+        // mõtle, et kuidas saaksid sellistele andmetele ligi (kogumik/list pangakontodest) .....
         // andmebaasi entiteid me edastada ei tohi.... ilmselt peab need enne tagastamist vajalikule kujule mäppima
         // vaata, et kas leiad mingi hea mapperi
         return null;
