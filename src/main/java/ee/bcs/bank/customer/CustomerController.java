@@ -19,8 +19,8 @@ public class CustomerController {
         return response;
     }
 
-    // Leiab klienid (ees JA perekonna) nime järgi
-    @GetMapping("/by/name")
+    // Leiab kliendi (ees JA perekonna) nime järgi
+    @PostMapping("/by/name")
     public CustomerResponse findCustomerByName(@RequestBody CustomerRequest request) {
         CustomerResponse response = customerService.findCustomerByName(request);
         return response;
