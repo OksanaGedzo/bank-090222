@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.annotation.AnnotationTypeMismatchException;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -29,28 +30,28 @@ public class BankTransactionService {
     private BankTransactionMapper bankTransactionMapper;
 
     public RequestResponse depositMoney(OwnerAccountTransactionRequest request) {
+
         RequestResponse response = new RequestResponse();
         String accountNumber = request.getAccountNumber();
         Integer amount = request.getAmount();
 
         if (bankAccountRepository.existsByAccountNumber(accountNumber)) {
             BankAccount bankAccount = bankAccountRepository.findByAccountNumber(accountNumber);
-            BankTransaction depositBankTransaction = bankTransactionMapper.toDepositTransaction(request);
+            // BankTransaction depositTransaction = bankTransactionRepository.findByBankAccount(bankAccount);
+            BankTransaction depositTransaction = bankTransactionMapper.toDepositTransaction(request);
+            // BankTransactionResponse response = bankTransactionMapper.toResponse(depositTransaction)
 
-            depositBankTransaction.setSenderAccountNumber(ATM);
-
-            depositBankTransaction.setReceiverAccountNumber(bankAccount.getAccountNumber());
-            depositBankTransaction.setAmount(amount);
+            depositTransaction.setSenderAccountNumber(ATM);
+            depositTransaction.setReceiverAccountNumber(bankAccount.getAccountNumber());
+            depositTransaction.setAmount(amount);
 
             Integer balance = bankAccount.getBalance();
             Integer newBalance = balance + amount;
             bankAccount.setBalance(newBalance);
-            depositBankTransaction.setBalance(newBalance);
-            bankTransactionRepository.save(depositBankTransaction);
+            depositTransaction.setBalance(newBalance);
+            bankTransactionRepository.save(depositTransaction);
 
-            //bankTransactionMapper.updateBankTransaction(response, depositBankTransaction);
-
-
+            //bankTransactionMapper.updateBankTransaction(response, depositTransaction);
             response.setMessage("Deposit is sucsessfuly added to account " + accountNumber);
         } else {
             response.setError("Sorry, this account does not exist ");
@@ -91,6 +92,32 @@ public class BankTransactionService {
     }
 
     public RequestResponse withdrawMoney(OwnerAccountTransactionRequest request) {
+
+        RequestResponse response = new RequestResponse();
+        String accountNumber = request.getAccountNumber();
+        Integer amount = request.getAmount();
+
+        if (bankAccountRepository.existsByAccountNumber(accountNumber)) {
+            BankAccount bankAccount = bankAccountRepository.findByAccountNumber(accountNumber);
+            BankTransaction withdrowTransaction = bankTransactionMapper.toWithdrawTransaction(request);
+
+            withdrowTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
+            withdrowTransaction.setReceiverAccountNumber(WITHDRAW);
+            withdrowTransaction.setAmount(amount);
+
+            Integer balance = bankAccount.getBalance();
+            Integer newBalance = balance - amount;
+            bankAccount.setBalance(newBalance);
+            withdrowTransaction.setBalance(newBalance);
+            bankTransactionRepository.save(withdrowTransaction);
+
+            response.setMessage("Please, take the money ");
+        } else {
+            response.setError("Sorry, this account does not exist ");
+        }
+        return response;
+
+
         // WITHDRAW MAKSE (ATM - võetakse pangaautomaadist raha välja)
         // Mõtle andmetele, et mis tulevad requestiga siia meetodisse sisse. Võid ka swaggeri ja debbugeriga vaadata.
 
@@ -121,10 +148,39 @@ public class BankTransactionService {
 
         // Kui tehing saab õnnelikult tehtud [save()], siis võiks response MESSAGE külge panna sõnumi "Deposiit edukalt sooritatud!"
 
-        return null;
     }
 
     public RequestResponse sendMoney(TransactionRequest request) {
+
+        RequestResponse response = new RequestResponse();
+        String senderAccountNumber = request.getSenderAccountNumber();
+        String receiverAccountNumber = request.getReceiverAccountNumber();
+        Integer amount = request.getAmount();
+
+        if (bankAccountRepository.existsByAccountNumber(senderAccountNumber)) {
+            BankAccount bankAccount = bankAccountRepository.findByAccountNumber(senderAccountNumber);
+            BankTransaction sendMoneyTransaction = bankTransactionMapper.toBankTransaction(request);
+
+            sendMoneyTransaction.setSenderAccountNumber(senderAccountNumber);
+            sendMoneyTransaction.setReceiverAccountNumber(receiverAccountNumber);
+            sendMoneyTransaction.setType(SEND);
+            sendMoneyTransaction.setAmount(amount);
+            sendMoneyTransaction.setBalance(bankAccount.getBalance());
+            sendMoneyTransaction.setTransactionDateTime(Instant.now());
+
+            Integer balance = bankAccount.getBalance();
+            Integer newBalance = balance - amount;
+
+            bankAccount.setBalance(newBalance);
+            sendMoneyTransaction.setBalance(newBalance);
+            bankTransactionRepository.save(sendMoneyTransaction);
+
+            response.setMessage("Congratulations, the money was send ");
+        } else {
+            response.setError("Ülekannet ei saanud teha, kuna pole sellise kontonumbriga EEXXXX klienti! ");
+        }
+        return response;
+
         // VÄLJUV MAKSE
         // Mõtle andmetele, et mis tulevad requestiga siia meetodisse sisse. Võid ka swaggeri ja debbugeriga vaadata.
 
@@ -180,10 +236,39 @@ public class BankTransactionService {
 
         // juhul kui receiverAccountNumber'it meie andmebaasis ei leidu, siis receive kannet pole lihtsalt vaja teha
 
-        return null;
     }
 
     public RequestResponse receiveMoney(TransactionRequest request) {
+
+        RequestResponse response = new RequestResponse();
+        String receiverAccountNumber = request.getReceiverAccountNumber();
+        String senderAccountNumber = request.getSenderAccountNumber();
+        Integer amount = request.getAmount();
+
+        if (bankAccountRepository.existsByAccountNumber(receiverAccountNumber)) {
+            BankAccount bankAccount = bankAccountRepository.findByAccountNumber(receiverAccountNumber);
+            BankTransaction receiveMoneyTransaction = bankTransactionMapper.toBankTransaction(request);
+            receiveMoneyTransaction.setReceiverAccountNumber(receiverAccountNumber);
+            receiveMoneyTransaction.setSenderAccountNumber(senderAccountNumber);
+
+            receiveMoneyTransaction.setType(RECEIVE);
+            receiveMoneyTransaction.setAmount(amount);
+            receiveMoneyTransaction.setBalance(bankAccount.getBalance());
+            receiveMoneyTransaction.setTransactionDateTime(Instant.now());
+
+            Integer balance = bankAccount.getBalance();
+            Integer newBalance = balance + amount;
+
+            bankAccount.setBalance(newBalance);
+            receiveMoneyTransaction.setBalance(newBalance);
+            bankTransactionRepository.save(receiveMoneyTransaction);
+
+            response.setMessage("Congratulations, the money was received ");
+        } else {
+            response.setError("Ülekannet ei saanud teha, kuna pole sellise kontonumbriga EEXXXX klienti! ");
+        }
+        return response;
+
         // Mõtle andmetele, et mis tulevad requestiga siia meetodisse sisse. Võid ka swaggeri ja debbugeriga vaadata.
 
         // LAEKUV MAKSE
@@ -194,7 +279,6 @@ public class BankTransactionService {
         // juhul kui senderAccountNumber'it meie andmebaasis ei leidu, siis võiks tagastatavas responses ERROR'i sõnumile külge panna sõnumi:
         // "Ülekannet ei saanud teha, kuna pole sellise kontonumbriga EEXXXX klienti!");
 
-        return null;
     }
 
     public List<BankTransactionResponse> findAllTransactions() {
