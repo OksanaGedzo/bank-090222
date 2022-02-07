@@ -20,7 +20,6 @@ public class BankTransactionService {
     public static final String WITHDRAW = "w";
 
 
-
     @Resource
     private BankAccountRepository bankAccountRepository;
 
@@ -106,7 +105,7 @@ public class BankTransactionService {
             BankAccount bankAccount = bankAccountRepository.findByAccountNumber(accountNumber);
             BankTransaction withdrowTransaction = bankTransactionMapper.toWithdrawTransaction(request);
 
-           // withdrowTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
+            // withdrowTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
             //withdrowTransaction.setReceiverAccountNumber(WITHDRAW);
             //withdrowTransaction.setAmount(amount);
 
@@ -260,7 +259,7 @@ public class BankTransactionService {
             BankTransaction receiveMoneyTransaction = bankTransactionMapper.toBankTransaction(request);
             receiveMoneyTransaction.setReceiverAccountNumber(receiverAccountNumber);
             receiveMoneyTransaction.setSenderAccountNumber(senderAccountNumber);
-
+            receiveMoneyTransaction.setBankAccount(bankAccount);
             receiveMoneyTransaction.setType(RECEIVE);
             receiveMoneyTransaction.setAmount(amount);
             receiveMoneyTransaction.setBalance(bankAccount.getBalance());
