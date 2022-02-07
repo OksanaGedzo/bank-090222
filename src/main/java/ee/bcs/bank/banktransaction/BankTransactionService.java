@@ -3,6 +3,7 @@ package ee.bcs.bank.banktransaction;
 import ee.bcs.bank.RequestResponse;
 import ee.bcs.bank.bankaccount.BankAccount;
 import ee.bcs.bank.bankaccount.BankAccountRepository;
+import net.bytebuddy.build.Plugin;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ public class BankTransactionService {
     public static final String RECEIVE = "r";
     public static final String DEPOSIT = "d";
     public static final String WITHDRAW = "w";
-    public static final String ATM = "ATM";
+
 
 
     @Resource
@@ -41,9 +42,13 @@ public class BankTransactionService {
             BankTransaction depositTransaction = bankTransactionMapper.toDepositTransaction(request);
             // BankTransactionResponse response = bankTransactionMapper.toResponse(depositTransaction)
 
-            depositTransaction.setSenderAccountNumber(ATM);
-            depositTransaction.setReceiverAccountNumber(bankAccount.getAccountNumber());
-            depositTransaction.setAmount(amount);
+            //depositTransaction.setSenderAccountNumber(ATM);
+            //depositTransaction.setReceiverAccountNumber(bankAccount.getAccountNumber());
+            //depositTransaction.setAmount(amount);
+
+            depositTransaction.setBankAccount(bankAccount);
+            depositTransaction.setType(DEPOSIT);
+            depositTransaction.setTransactionDateTime(Instant.now());
 
             Integer balance = bankAccount.getBalance();
             Integer newBalance = balance + amount;
@@ -101,9 +106,14 @@ public class BankTransactionService {
             BankAccount bankAccount = bankAccountRepository.findByAccountNumber(accountNumber);
             BankTransaction withdrowTransaction = bankTransactionMapper.toWithdrawTransaction(request);
 
-            withdrowTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
-            withdrowTransaction.setReceiverAccountNumber(WITHDRAW);
-            withdrowTransaction.setAmount(amount);
+           // withdrowTransaction.setSenderAccountNumber(bankAccount.getAccountNumber());
+            //withdrowTransaction.setReceiverAccountNumber(WITHDRAW);
+            //withdrowTransaction.setAmount(amount);
+
+            withdrowTransaction.setBankAccount(bankAccount);
+            withdrowTransaction.setType(WITHDRAW);
+            withdrowTransaction.setTransactionDateTime(Instant.now());
+
 
             Integer balance = bankAccount.getBalance();
             Integer newBalance = balance - amount;
