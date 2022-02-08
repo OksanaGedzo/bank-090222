@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #c2c5ff
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<br>
+<br>
+
+<h1>TERE TULEMAST</h1>
+<h2>See on minu kodulehekülg</h2>
+<h3>Tahan tulla teile praktikale</h3>
+<h4>FULL STACK ARENDAJAD</h4>
+
+<br>
+<br>
+
+
+<select id="internSelect">
+    <option value="1">Rain Tüür</option>
+    <option value="2">Aleksei Roland</option>
+</select>
+<br>
+<br>
+<table border="1" style="color: lightgrey; background-color : lightslategrey">
+    <tr>
+        <td>Nimi</td>
+        <td>Perekonna nimi</td>
+    </tr>
+    <tr>
+        <td>Laisa</td>
+        <td>Minelli</td>
+    </tr>
+    <tr>
+        <td>Agatha</td>
+        <td>Cristi</td>
+    </tr>
+</table>
+<br>
+<br>
+<!--  -->
+<!-- <input id="dateSelected" type="date">  -->
+<br>
+<br>
+<button id="internButton">Bronni mind!!!! Pliiis!</button>
+
+<br>
+<br>
+
+
+<br>
+<br>
+Andmed SISSE:
+<input type="text" id="someTextInput">
+<br>
+<br>
+Andmed VÄLJA:
+<input disabled type="text" id="someTextOutput">
+<br>
+<br>
+<button id="inputButton">Lae andmed</button>
+
+<br>
+<br>
+
+Miinimum A'st ja B'st
+<br>
+<br>
+A: <input type="number" id="minA"> B:<input type="number" id="minB">
+<br>
+<br>
+Vastus:
+<input type="text" id="minAnswer">
+<br>
+<br>
+<button id="minButton" >Arvuta min</button>
+
+<br>
+<br>
+<br>
+
+
+<button id="fetchDemoButton">fetch</button>
+<br>
+<br>
+<br>
+
+<h2>
+    <a href="https://www.brightspot.com/learn/articles/5-reasons-why-the-code-review-process-is-critical-for-developers">
+        5 reasons why the code review process is critical for developers
+    </a>
+
+</h2>
+
+
+<ul id="wtfMenu">
+    <li>wtf</li>
+    <li>wtf dude</li>
+    <li>wtf is this sh***</li>
+</ul>
+<br>
+<img src="https://www3.tallinn.ee/gal_pildid/196541.jpg" alt="">
+<br>
+
+<br>
+<br>
+<br>
+
+<script>
+    let elementMinA = document.getElementById('minA');
+    let elementMinB = document.getElementById('minB');
+    let elementMinAnswer = document.getElementById('minAnswer');
+    let elementMinButton = document.getElementById('minButton')
+
+    elementMinButton.onclick = function () {
+        let valueA = elementMinA.value;
+        let valueB = elementMinB.value;
+
+        elementMinAnswer.value = Number(valueA) < Number(valueB) ? valueA : valueB;
+    }
+
+
+    let elementFetchButton = document.getElementById('fetchDemoButton');
+    var myHeaders = new Headers();
+    myHeaders.append("accept", "application/json");
+
+    var raw = "";
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    }
+    elementFetchButton.onclick = function () {
+
+        fetch("http://localhost:8080/transaction/all", requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,9 +1,11 @@
 package ee.bcs.bank.banktransaction;
 
 import ee.bcs.bank.RequestResponse;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -41,7 +43,7 @@ public class BankTransactionController {
         return response;
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<BankTransactionResponse> findAllTransactions() {
         // VAATA SELLE NÄIDISE LAHENDUST ja mõtle, et kuidas saaks ära selle viimase controlleri lahenduse.
         List<BankTransactionResponse> response = bankTransactionService.findAllTransactions();
