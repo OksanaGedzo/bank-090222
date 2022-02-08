@@ -21,7 +21,7 @@
 
 <select id="internSelect">
     <option value="1">Marts</option>
-    <option value="2">Marta </option>
+    <option value="2">Marta</option>
 </select>
 <br>
 
@@ -62,7 +62,7 @@ Vastus:
 <input type="text" id="minAnswer">
 <br>
 <br>
-<button id="minButton" >Arvuta min</button>
+<button id="minButton">Arvuta min</button>
 
 <br>
 <br>
@@ -77,7 +77,7 @@ Vastus:
 <h2>
 
     <a href="https://levelupaudit.com/blog/webetiquette">
-     Good solutions
+        Good solutions
     </a>
 
 </h2>
@@ -90,15 +90,26 @@ Vastus:
 </ul>
 
 <img
-     src="https://www3.tallinn.ee/gal_pildid/196541.jpg" >
+        src="https://www3.tallinn.ee/gal_pildid/196541.jpg">
 <br>
 <textarea style="color: lightgrey; background-color : lightslategrey" id="2" cols="80" rows="3">Nurr- nurr </textarea>
 <br>
 <br>
-<br>
+
 
 <br>
-
+<br>
+<br>
+ISIKUKOOD
+<br>
+<br>
+<input type="text" name="inputIdKood" id="inputIsikukood">
+<button id="fetchFindTransactionByIdButton">fetch</button>
+<br>
+<br>
+<textarea style="color: lightgrey; background-color : lightslategrey" id="responseField" cols="80"
+          rows="25"> </textarea>
+<br>
 <script>
     let elementMinA = document.getElementById('minA');
     let elementMinB = document.getElementById('minB');
@@ -126,14 +137,25 @@ Vastus:
     };
 
 
-
     elementFetchButton.onclick = function () {
         fetch("http://localhost:8080/transaction/all", requestOptions)
             .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-    };
+    }
 
+    let elementFetchFindTransactionByIdButton = document.getElementById('fetchFindTransactionByIdButton')
+    let elementIdField = document.getElementById('inputIsikukood')
+    let elementResponseField = document.getElementById('responseField')
+
+    elementFetchFindTransactionByIdButton.onclick = function () {
+        fetch("http://localhost:8080/transaction/all/by/id/code?idCode=" + elementIdField.value, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                elementResponseField.value = result.valueOf()
+            })
+            .catch(error => console.log('error', error));
+    }
 </script>
 
 </body>

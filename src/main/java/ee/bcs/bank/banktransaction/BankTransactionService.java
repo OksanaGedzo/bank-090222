@@ -297,10 +297,12 @@ public class BankTransactionService {
     }
 
     public List<BankTransactionResponse> findAllTransactionsByIdCode(String idCode) {
+        List<BankTransaction> bankTransactions = bankTransactionRepository.findByBankAccount_Customer_PersonalIdentificationCode(idCode);
+        List<BankTransactionResponse> bankTransactionResponses = bankTransactionMapper.toResponseList(bankTransactions);
+        return  bankTransactionResponses;
         // Vaata eelmist lahendust ja mõtle :)
         // Mõtle, et millise repository abil sa saaksid sellele bank_transaction tabeli andmetele ligi
         // Vajadusel kasuta JPA Pallete abi, et luua vajalik repository meetod, millega saad kätte need andmed, mis sind huvitavad.
 
-        return null;
     }
 }
