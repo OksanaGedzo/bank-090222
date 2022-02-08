@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        body {
-            background-color: #c2c5ff
-        }
-    </style>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -25,37 +20,20 @@
 
 
 <select id="internSelect">
-    <option value="1">Rain Tüür</option>
-    <option value="2">Aleksei Roland</option>
+    <option value="1">Marts</option>
+    <option value="2">Marta </option>
 </select>
 <br>
-<br>
-<table border="1" style="color: lightgrey; background-color : lightslategrey">
-    <tr>
-        <td>Nimi</td>
-        <td>Perekonna nimi</td>
-    </tr>
-    <tr>
-        <td>Laisa</td>
-        <td>Minelli</td>
-    </tr>
-    <tr>
-        <td>Agatha</td>
-        <td>Cristi</td>
-    </tr>
-</table>
-<br>
+
 <br>
 <!--  -->
 <!-- <input id="dateSelected" type="date">  -->
 <br>
 <br>
-<button id="internButton">Bronni mind!!!! Pliiis!</button>
+<button id="internButton">Check up!</button>
 
 <br>
 <br>
-
-
 <br>
 <br>
 Andmed SISSE:
@@ -74,7 +52,10 @@ Andmed VÄLJA:
 Miinimum A'st ja B'st
 <br>
 <br>
-A: <input type="number" id="minA"> B:<input type="number" id="minB">
+A: <input type="number" id="minA">
+<br>
+<br>
+B:<input type="number" id="minB">
 <br>
 <br>
 Vastus:
@@ -94,24 +75,28 @@ Vastus:
 <br>
 
 <h2>
-    <a href="https://www.brightspot.com/learn/articles/5-reasons-why-the-code-review-process-is-critical-for-developers">
-        5 reasons why the code review process is critical for developers
+
+    <a href="https://levelupaudit.com/blog/webetiquette">
+     Good solutions
     </a>
 
 </h2>
 
 
-<ul id="wtfMenu">
-    <li>wtf</li>
-    <li>wtf dude</li>
-    <li>wtf is this sh***</li>
+<ul id="Menu">
+    <li>waw</li>
+    <li>waw</li>
+    <li>waw</li>
 </ul>
+
+<img
+     src="https://www3.tallinn.ee/gal_pildid/196541.jpg" >
 <br>
-<img src="https://www3.tallinn.ee/gal_pildid/196541.jpg" alt="">
+<textarea style="color: lightgrey; background-color : lightslategrey" id="2" cols="80" rows="3">Nurr- nurr </textarea>
+<br>
+<br>
 <br>
 
-<br>
-<br>
 <br>
 
 <script>
@@ -129,25 +114,25 @@ Vastus:
 
 
     let elementFetchButton = document.getElementById('fetchDemoButton');
-    var myHeaders = new Headers();
+
+
+    let myHeaders = new Headers();
     myHeaders.append("accept", "application/json");
 
-    var raw = "";
-
-    var requestOptions = {
+    let requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        body: raw,
         redirect: 'follow'
-    }
-    elementFetchButton.onclick = function () {
+    };
 
+
+
+    elementFetchButton.onclick = function () {
         fetch("http://localhost:8080/transaction/all", requestOptions)
             .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-
-    }
+    };
 
 </script>
 
