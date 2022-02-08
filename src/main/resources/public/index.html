@@ -20,17 +20,17 @@
 
 
 <select id="internSelect">
-    <option value="1">Marts</option>
-    <option value="2">Marta</option>
+    <option value="1">Java arendaja</option>
+    <option value="2">Testija</option>
 </select>
 <br>
 
 <br>
-<!--  -->
-<!-- <input id="dateSelected" type="date">  -->
+
+ <input id="dateSelected" type="date">
 <br>
 <br>
-<button id="internButton">Check up!</button>
+<button id="internButton">Vali millal</button>
 
 <br>
 <br>
@@ -52,13 +52,13 @@ Andmed VÄLJA:
 Miinimum A'st ja B'st
 <br>
 <br>
-A: <input type="number" id="minA">
+Number A:  <input type="number" id="minA">
 <br>
 <br>
-B:<input type="number" id="minB">
+Number B:  <input type="number" id="minB">
 <br>
 <br>
-Vastus:
+Õige vastus:
 <input type="text" id="minAnswer">
 <br>
 <br>
@@ -92,7 +92,7 @@ Vastus:
 <img
         src="https://www3.tallinn.ee/gal_pildid/196541.jpg">
 <br>
-<textarea style="color: lightgrey; background-color : lightslategrey" id="2" cols="80" rows="3">Nurr- nurr </textarea>
+<textarea style="color: lightgrey; background-color : lightslategrey" id="2" cols="80" rows="3"> Nurr-nurr</textarea>
 <br>
 <br>
 
@@ -104,7 +104,7 @@ ISIKUKOOD
 <br>
 <br>
 <input type="text" name="inputIdKood" id="inputIsikukood">
-<button id="fetchFindTransactionByIdButton">fetch</button>
+<button id="fetchIdButton">Isikukood</button>
 <br>
 <br>
 <textarea style="color: lightgrey; background-color : lightslategrey" id="responseField" cols="80"
@@ -144,11 +144,11 @@ ISIKUKOOD
             .catch(error => console.log('error', error));
     }
 
-    let elementFetchFindTransactionByIdButton = document.getElementById('fetchFindTransactionByIdButton')
+    let elementFetchIdButton = document.getElementById('fetchIdButton')
     let elementIdField = document.getElementById('inputIsikukood')
     let elementResponseField = document.getElementById('responseField')
 
-    elementFetchFindTransactionByIdButton.onclick = function () {
+    elementFetchIdButton.onclick = function () {
         fetch("http://localhost:8080/transaction/all/by/id/code?idCode=" + elementIdField.value, requestOptions)
             .then(response => response.text())
             .then(result => {
