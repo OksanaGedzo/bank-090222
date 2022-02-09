@@ -14,7 +14,9 @@ public interface BankTransactionMapper {
     // eraldi on mäpitud firstName ja lastName, sest ülejäänud välja nimed on nendel objektidel samad.
     @Mapping(target = "firstName", source = "bankAccount.customer.firstName")
     @Mapping(target = "lastName", source = "bankAccount.customer.lastName")
+    @Mapping(target = "idCode" , source = "bankAccount.customer.personalIdentificationCode")
     BankTransactionResponse toResponse(BankTransaction transaction);
+
 
     // Sama mis eelmine kohe siin üleval, aga tehakse List sisend -> List väljund
     List<BankTransactionResponse> toResponseList(List<BankTransaction> transaction);

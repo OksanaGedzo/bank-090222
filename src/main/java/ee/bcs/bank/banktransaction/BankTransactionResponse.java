@@ -9,6 +9,7 @@ import java.time.Instant;
 public class BankTransactionResponse implements Serializable {
     private final String firstName;
     private final String lastName;
+    private final String idCode;
     private final String senderAccountNumber;
     private final String receiverAccountNumber;
     private final Integer amount;
